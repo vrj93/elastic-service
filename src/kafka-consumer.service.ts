@@ -12,7 +12,7 @@ export class KafkaConsumerService implements OnModuleInit {
   async onModuleInit() {
     this.kafka = new Kafka({
       clientId: 'product-service',
-      brokers: ['192.168.0.101:9092'],
+      brokers: [process.env.kafkaConnect],
     });
     this.consumer = this.kafka.consumer({ groupId: 'product-group' });
     await this.connectConsumer();
