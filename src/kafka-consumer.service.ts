@@ -1,18 +1,22 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { Kafka, Consumer } from 'kafkajs';
 import { AppService } from './app.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class KafkaConsumerService implements OnModuleInit {
   private kafka: Kafka;
   private consumer: Consumer;
 
-  constructor(private readonly elasticsearchService: AppService) {}
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly elasticsearchService: AppService,
+  ) {}
 
   async onModuleInit() {
     this.kafka = new Kafka({
       clientId: 'product-service',
-      brokers: [process.env.kafkaConnect],
+      brokers: [this.configService.get<string>('kafkaConnect')],
     });
     this.consumer = this.kafka.consumer({ groupId: 'product-group' });
     await this.connectConsumer();
