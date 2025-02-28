@@ -9,7 +9,7 @@ export class AppService {
     await this.elasticsearchService.index({
       index: 'products',
       id: document._id,
-      document: {
+      body: {
         name: document.name,
         description: document.description,
         price: document.price,

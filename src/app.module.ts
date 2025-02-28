@@ -9,8 +9,11 @@ import { KafkaConsumerService } from './kafka-consumer.service';
     ElasticsearchModule.register({
       node: process.env.elasticConnect,
       auth: {
-        username: process.env.elasticUser,
+        username: process.env.elasticUsername,
         password: process.env.elasticPassword,
+      },
+      tls: {
+        rejectUnauthorized: false, //Allows self-signed certs
       },
     }),
   ],
