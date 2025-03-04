@@ -12,7 +12,10 @@ export class AppService {
       body: {
         name: document.name,
         description: document.description,
-        price: document.price,
+        category: document.category,
+        brand: document.brand,
+        color: document.specifications.color,
+        price: document.price.amount,
       },
     });
   }
