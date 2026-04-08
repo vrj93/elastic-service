@@ -11,12 +11,14 @@ export class AppService {
         index: 'products',
         id: document._id,
         document: {
+          id: document._id,
           name: document.name,
           description: document.description,
           category: document.category,
           brand: document.brand,
           color: document.specifications?.color,
           price: document.price?.amount ?? 0,
+          created_at: new Date(),
         },
       });
     } catch (error) {
